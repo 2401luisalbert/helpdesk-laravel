@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str; // Asegúrate de importar Str
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,7 +37,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
+        [$message, $author] = Str::of(Inspiring::quotes()->random())->explode('-');
 
         $user = $request->user();
 
@@ -48,6 +49,12 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user ? array_merge($user->toArray(), [
                     'roles' => $user->getRoleNames()->toArray(),
                 ]) : null,
+            ],
+            'flash' => [ // Agrega esta línea para los mensajes flash
+                'success' => session('success'),
+                'error' => session('error'),
+                'info' => session('info'),
+                'warning' => session('warning'),
             ],
         ];
     }
