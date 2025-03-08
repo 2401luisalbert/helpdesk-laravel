@@ -8,11 +8,12 @@ import { type BreadcrumbItem, RegisterForm, Role } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
-import { usePage } from '@inertiajs/react';
 
 const initialData = {
     num_employee: null,
     name: '',
+    last_name: '',
+    last_name2: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -24,8 +25,6 @@ export default function Register({ roles }: { roles: Role[] }) {
         ...initialData,
     });
 
-    const { props } = usePage();
-
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Panel de control', href: '/dashboard' },
         { title: 'Register', href: '/register' },
@@ -34,6 +33,7 @@ export default function Register({ roles }: { roles: Role[] }) {
     const resetForm = () => {
         setData(initialData);
     };
+
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -104,6 +104,34 @@ export default function Register({ roles }: { roles: Role[] }) {
                                     required
                                 />
                                 {errors.name && <InputError message={errors.name} />}
+                            </div>
+
+                            {/* Campo Apellido */}
+                            <div>
+                                <Label htmlFor="last_name">Apellido</Label>
+                                <Input
+                                    id="last_name"
+                                    name="last_name"
+                                    value={data.last_name}
+                                    onChange={(e) => setData('last_name', e.target.value)}
+                                    disabled={processing}
+                                    required
+                                />
+                                {errors.last_name && <InputError message={errors.last_name} />}
+                            </div>
+
+                            {/* Campo Apellido 2 */}
+                            <div>
+                                <Label htmlFor="last_name2">Apellido 2</Label>
+                                <Input
+                                    id="last_name2"
+                                    name="last_name2"
+                                    value={data.last_name2}
+                                    onChange={(e) => setData('last_name2', e.target.value)}
+                                    disabled={processing}
+                                    required
+                                />
+                                {errors.last_name2 && <InputError message={errors.last_name2} />}
                             </div>
 
                             {/* Campo Correo electrónico */}

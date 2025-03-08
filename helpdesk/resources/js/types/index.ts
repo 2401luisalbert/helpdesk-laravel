@@ -53,6 +53,8 @@ export interface SharedData {
 export interface User {
     id: number;
     name: string;
+    last_name: string;
+    last_name2: string;
     email: string;
     avatar?: string;
     email_verified_at: string | null;
@@ -80,6 +82,8 @@ export interface RoleSelectProps {
 export type RegisterForm = {
     num_employee: number | null;
     name: string;
+    last_name: string;
+    last_name2: string;
     email: string;
     password: string;
     password_confirmation: string;

@@ -12,7 +12,6 @@ export function AppSidebar() {
     
     // Simple role checking
     const isAdmin = auth.user?.roles?.includes('admin') || false;
-
     const mainNavItems: NavItem[] = [
         {
             title: 'Panel de control',

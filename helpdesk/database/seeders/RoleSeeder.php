@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
@@ -12,19 +13,57 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Lista de roles
-        $roles = [
-            'admin',
-            'support',
-            'user',
-            'prevention',
+        // Crear permisos
+        $permissions = [
+            'create ticket',
+            'view ticket',
+            'edit ticket',
+            'delete ticket',
+            'assign ticket',
+            'view dashboard',
+            'manage users',
+            'manage roles',
+            'manage permissions',
         ];
 
-        // Crear roles solo si no existen
-        foreach ($roles as $roleName) {
-            Role::firstOrCreate(
-                ['name' => $roleName, 'guard_name' => 'web']
-            );
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        // Definir roles con sus permisos
+        $roles = [
+            'admin' => [
+                'create ticket',
+                'view ticket',
+                'edit ticket',
+                'delete ticket',
+                'assign ticket',
+                'view dashboard',
+                'manage users',
+                'manage roles',
+                'manage permissions',
+            ],
+            'support' => [
+                'view ticket',
+                'edit ticket',
+                'assign ticket',
+                'view dashboard',
+            ],
+            'prevention' => [
+                'create ticket',
+                'view ticket',
+                'view dashboard',
+            ],
+            'user' => [
+                'create ticket',
+                'view ticket',
+            ],
+        ];
+
+        // Crear roles y asignar permisos
+        foreach ($roles as $roleName => $rolePermissions) {
+            $role = Role::create(['name' => $roleName]);
+            $role->syncPermissions($rolePermissions);
         }
     }
 }

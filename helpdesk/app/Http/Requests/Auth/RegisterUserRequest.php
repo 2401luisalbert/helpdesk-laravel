@@ -25,10 +25,11 @@ class RegisterUserRequest extends FormRequest
         return [
             'num_employee' => 'required|int|max:255|unique:users,num_employee',
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'last_name2' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => 'required|exists:roles,id', 
-            'num_employee' => 'required|numeric|unique:users,num_employee',
         ];
     }
     
@@ -42,6 +43,8 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'name.required' => 'El nombre es obligatorio',
+            'last_name.required' => 'El apellido es obligatorio',
+            'last_name2.required' => 'El apellido 2 es obligatorio',
             'email.required' => 'El correo electrónico es obligatorio',
             'email.email' => 'Debe ser un correo electrónico válido',
             'email.unique' => 'Este correo electrónico ya está registrado',
