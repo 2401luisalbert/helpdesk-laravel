@@ -1,4 +1,4 @@
-import { Role, RoleSelectProps } from '@/types';
+import { RoleSelectProps } from '@/types';
 
 export default function RoleSelect({
     roles,
@@ -10,8 +10,8 @@ export default function RoleSelect({
     error,
 }: RoleSelectProps) {
     return (
-        <div className="flex flex-col gap-2">
-            {label && <label className="font-medium">{label}</label>}
+        <div className="flex flex-col">
+            {label && <label className="font-bold">{label}</label>}
             <select
                 value={value || ''} // Si value es null, usa una cadena vacía
                 onChange={(e) => onChange(Number(e.target.value))} // Convierte el valor a número
