@@ -8,7 +8,6 @@ import { type BreadcrumbItem, RegisterForm, Role } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
-import FlashMessage from '@/components/flash-message';
 import { usePage } from '@inertiajs/react';
 
 const initialData = {
@@ -26,8 +25,6 @@ export default function Register({ roles }: { roles: Role[] }) {
     });
 
     const { props } = usePage();
-
-    console.log('Props:', props);
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Panel de control', href: '/dashboard' },
@@ -66,7 +63,6 @@ export default function Register({ roles }: { roles: Role[] }) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <FlashMessage />
             <Head title="Register" />
             <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center p-6">
                 <div className="w-full max-w-md rounded-xl border border-neutral-200 bg-white p-8 shadow-lg dark:border-neutral-800 dark:bg-neutral-900">
