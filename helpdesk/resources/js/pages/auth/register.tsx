@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, RegisterForm, Role } from '@/types';
+import { type IBreadcrumbItem, IRegisterForm, IRole } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
-const initialData: RegisterForm = {
+const initialData: IRegisterForm = {
     num_employee: null, // Inicialmente vacío
     name: '',
     last_name: '',
@@ -20,12 +20,12 @@ const initialData: RegisterForm = {
     role: 1,
 };
 
-export default function Register({ roles }: { roles: Role[] }) {
-    const { data, setData, post, processing, errors } = useForm<RegisterForm>({
+export default function Register({ roles }: { roles: IRole[] }) {
+    const { data, setData, post, processing, errors } = useForm<IRegisterForm>({
         ...initialData,
     });
 
-    const breadcrumbs: BreadcrumbItem[] = [
+    const breadcrumbs: IBreadcrumbItem[] = [
         { title: 'Panel de control', href: '/dashboard' },
         { title: 'Register', href: '/register' },
     ];
@@ -204,7 +204,8 @@ export default function Register({ roles }: { roles: Role[] }) {
                         </div>
 
                         {/* Botón de envío */}
-                        <Button type="submit" disabled={processing} className="w-100">
+                        <div className="flex justify-center">
+                        <Button type="submit" disabled={processing} className="w-100 dark:bg-neutral-800 dark:text-white dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 ">
                             {processing ? (
                                 <>
                                     <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
@@ -214,6 +215,7 @@ export default function Register({ roles }: { roles: Role[] }) {
                                 'Registrar'
                             )}
                         </Button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { RoleSelectProps } from '@/types';
+import { IRoleSelectProps } from '@/types';
 
 export default function RoleSelect({
     roles,
@@ -8,7 +8,7 @@ export default function RoleSelect({
     label,
     disabled,
     error,
-}: RoleSelectProps) {
+}: IRoleSelectProps) {
     return (
         <div className="flex flex-col">
             {label && <label className="font-bold">{label}</label>}

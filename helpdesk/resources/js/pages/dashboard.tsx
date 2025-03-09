@@ -1,9 +1,9 @@
 
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { type IBreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
-const breadcrumbs: BreadcrumbItem[] = [
+const breadcrumbs: IBreadcrumbItem[] = [
     {
         title: 'Panel de control',
         href: '/dashboard',

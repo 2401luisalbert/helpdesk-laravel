@@ -1,8 +1,9 @@
 import { LucideIcon } from 'lucide-react';
 import 'inertia';
+import { ColumnDef } from '@tanstack/react-table';
 
 declare module '@inertiajs/react' {
-    export interface PageProps {
+    export interface IPageProps {
         flash: {
             success?: string;
             error?: string;
@@ -18,39 +19,39 @@ declare module '@inertiajs/react' {
         };
         name: string;
         quote: { message: string; author: string };
-        auth: Auth;
+        auth: IAuth;
         [key: string]: unknown; // Propiedades adicionales dinámicas
     }
 }
-export interface Auth {
-    user: User;
+export interface IAuth {
+    user: IUser;
 }
 
-export interface BreadcrumbItem {
+export interface IBreadcrumbItem {
     title: string;
     href: string;
 }
 
-export interface NavGroup {
+export interface INavGroup {
     title: string;
-    items: NavItem[];
+    items: INavItem[];
 }
 
-export interface NavItem {
+export interface INavItem {
     title: string;
     url: string;
     icon?: LucideIcon | null;
     isActive?: boolean;
 }
 
-export interface SharedData {
+export interface ISharedData {
     name: string;
     quote: { message: string; author: string };
-    auth: Auth;
+    auth: IAuth;
     [key: string]: unknown;
 }
 
-export interface User {
+export interface IUser {
     id: number;
     name: string;
     last_name: string;
@@ -61,16 +62,16 @@ export interface User {
     created_at: string;
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
-    roles: Role[];
+    roles: IRole[];
 }
 
-export interface Role {
+export interface IRole {
     id: number;
     name: string;
 }
 
-export interface RoleSelectProps {
-    roles: Role[]; // Lista de roles disponibles
+export interface IRoleSelectProps {
+    roles: IRole[]; // Lista de roles disponibles
     value: number | null; // ID del rol seleccionado
     onChange: (roleId: number) => void; // Función para manejar el cambio
     placeholder?: string;
@@ -79,7 +80,7 @@ export interface RoleSelectProps {
     error?: string;
 }
 
-export type RegisterForm = {
+export type IRegisterForm = {
     num_employee: number | null;
     name: string;
     last_name: string;
@@ -92,7 +93,7 @@ export type RegisterForm = {
 
 
 declare module '@inertiajs/core' {
-    interface PageProps {
+    interface IPageProps {
         session?: {
             success?: string; // Mensaje de éxito
         };
@@ -102,3 +103,9 @@ declare module '@inertiajs/core' {
         };
     }
 }
+
+export interface IDataTableProps<TData> {
+    columns: ColumnDef<TData, unknown>[];
+    data: TData[];
+}
+

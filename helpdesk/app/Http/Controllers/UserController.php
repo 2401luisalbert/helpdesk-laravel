@@ -14,19 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Recuperar todos los usuarios con sus roles
-        $users = User::with('roles')->get()->map(function ($user) {
-            return [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'roles' => $user->roles->pluck('name'), // Obtener solo los nombres de los roles
-            ];
-        });
-
-        // Devolver los datos al frontend usando Inertia
-        return Inertia::render('user/user-index', [
-            'users' => $users,
-        ]);
+        $users = User::with('roles:id,name')->get(['id', 'num_employee', 'name', 'last_name', 'last_name2', 'email']);
+        
+        return Inertia::render('user/user-index', compact('users'));
     }
 }

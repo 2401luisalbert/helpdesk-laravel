@@ -2,17 +2,17 @@ import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem, type SharedData } from '@/types';
+import { type INavItem, type ISharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { LayoutGrid, UserPlus, Users2 } from 'lucide-react';
 import AppLogo from './app-logo';
 
 export function AppSidebar() {
-    const { auth } = usePage<SharedData>().props;
+    const { auth } = usePage<ISharedData>().props;
     
     // Simple role checking
     const isAdmin = auth.user?.roles?.includes('admin') || false;
-    const mainNavItems: NavItem[] = [
+    const mainNavItems: INavItem[] = [
         {
             title: 'Panel de control',
             url: route('dashboard'),
@@ -32,7 +32,7 @@ export function AppSidebar() {
         ] : []),
     ];
 
-    const footerNavItems: NavItem[] = [];
+    const footerNavItems: INavItem[] = [];
 
     return (
         <Sidebar collapsible="icon" variant="inset">
