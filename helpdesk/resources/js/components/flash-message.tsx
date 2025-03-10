@@ -55,7 +55,7 @@ export default function FlashMessage() {
                     padding: '16px',
                     fontSize: '1rem',
                     fontWeight: 500,
-                    width: '600px',
+                    width: '100%',
                 },
             }}
         />

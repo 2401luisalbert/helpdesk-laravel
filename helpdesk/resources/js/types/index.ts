@@ -109,3 +109,12 @@ export interface IDataTableProps<TData> {
     data: TData[];
 }
 
+export interface IAlertProps {
+    title: string;
+    text: string;
+    confirmButtonText: string;
+    cancelButtonText?: string;
+    onConfirm: () => void;
+    onCancel?: () => void;
+}
+

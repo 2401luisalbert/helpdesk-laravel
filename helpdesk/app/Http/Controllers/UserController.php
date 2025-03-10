@@ -18,4 +18,10 @@ class UserController extends Controller
         
         return Inertia::render('user/user-index', compact('users'));
     }
+
+    public function destroy($id)
+    {
+        User::findOrFail($id)->delete();
+        return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
+    }
 }

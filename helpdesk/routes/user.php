@@ -8,4 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('user', [UserController::class, 'index'])
     ->name('users.index')->middleware('role:admin');
+
+    Route::delete('user/{id}', [UserController::class, 'destroy'])
+    ->name('users.destroy')->middleware('role:admin');
 });

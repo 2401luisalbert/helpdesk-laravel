@@ -1,12 +1,11 @@
-// pages/UserIndex.tsx
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import { type IBreadcrumbItem, type IUser, type IRole } from '@/types';
 import GenericTable from '@/components/generic-table';
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { Pencil, Trash } from 'lucide-react';
-
+import { Alert } from '@/components/ui/alert-confirm';
 
 const breadcrumbs: IBreadcrumbItem[] = [
     {
@@ -20,12 +19,23 @@ const breadcrumbs: IBreadcrumbItem[] = [
 ];
 
 export default function UserIndex({ users }: { users: IUser[] }) {
+    const { delete: destroy } = useForm();
+
     const handleEdit = (user: IUser) => {
         console.log('Editar usuario:', user);
     };
 
-    const handleDelete = (user: IUser) => {
-        console.log('Eliminar usuario:', user);
+    const handleDelete = (id: number) => {
+        // Usar el componente Alert para confirmar la eliminación
+        Alert({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar',
+            onConfirm: () => {
+                destroy(route('users.destroy', { id }));
+            },
+        });
     };
 
     const columns: ColumnDef<IUser>[] = [
@@ -80,7 +90,7 @@ export default function UserIndex({ users }: { users: IUser[] }) {
                     <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => handleDelete(row.original)}
+                        onClick={() => handleDelete(row.original.id)}
                         className="text-red-600 hover:text-red-800"
                     >
                         <Trash className="h-4 w-4" />
